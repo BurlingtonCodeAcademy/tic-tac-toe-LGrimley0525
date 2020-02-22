@@ -11,7 +11,6 @@ let reset = document.querySelector("#reset");
 let turn = 0; //for PVP option
 
 
-
 // Creates game board ------------------------------------------------------------
 const generalBoard = (() => {
     let board = ["topLeft", "topCenter", "topRight", "centerLeft", "center", "centerRight", "bottomLeft", "bottomCenter", "bottomRight"]
@@ -148,12 +147,12 @@ const game = (() => {
             menu.classList.remove("visible");
             setTimeout(() => {
                 menu.remove()
-            }, 500);
+            }, 1000);
             setTimeout(() => {
                 info.classList.remove("invisible")
                 info.classList.add("visible");
-            }, 500)
-        }, 500);
+            }, 1000)
+        }, 1000);
     }
     function start() {
         box = document.querySelectorAll(".cell")
@@ -252,7 +251,7 @@ const game = (() => {
                             } else {
                                 movePc(position)
                             }
-                        }, 300)
+                        }, 1000)
                     }
                 }
             })
@@ -403,7 +402,7 @@ optionPVP.addEventListener("click", () => {
     list.classList.add("invisible");
     setTimeout(() => {
         list.remove();
-    }, 500)
+    }, 1000)
     setTimeout(() => {
         game.formPVP();
         playButton.addEventListener("click", () => {
@@ -420,14 +419,14 @@ optionPVP.addEventListener("click", () => {
         reset.classList.add("visible")
         menu.classList.toggle("invisible");
         menu.classList.toggle("visible");
-    }, 500)
+    }, 1000)
 })
 //If Player selects to play against computer--------------------------------------------------
 optionPVPC.addEventListener("click", () => {
     list.classList.add("invisible");
     setTimeout(() => {
         list.remove();
-    }, 500)
+    }, 1000)
     setTimeout(() => {
         game.formPVPC();
         playButton.addEventListener("click", () => {
@@ -444,9 +443,12 @@ optionPVPC.addEventListener("click", () => {
         reset.classList.add("visible")
         menu.classList.toggle("invisible");
         menu.classList.toggle("visible");
-    }, 500)
+    }, 1000)
 
 })
+
+//Interval Timer
+//setInterval(function (), 1000)
 
 //reset button function-----------------------------------------------------------------------
 // let reset = document.querySelector("#reset");
