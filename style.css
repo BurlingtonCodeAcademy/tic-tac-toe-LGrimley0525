@@ -114,7 +114,7 @@ main .list button.disabled{
 .form button:hover{
     background:  blueviolet;
     border-color:  rgb(235, 176, 176);
-    color: #ffeecf;
+    color:   rgb(235, 176, 176);
     transition: all .2s ease;
 }
 

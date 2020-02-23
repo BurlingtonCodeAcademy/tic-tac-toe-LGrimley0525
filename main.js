@@ -1,5 +1,4 @@
 //Welcome message to the player(s)
-
 alert('Welcome to Tic-Tac-Toe! The rules are to get 3 in-a-row, whether up, down, or diagonally.  Click below to either play with another human or play against the computer - and be sure to have fun!')
 
 //Global Variables--------------------------------------------------------------------
@@ -9,7 +8,6 @@ let list = document.querySelector(".list");
 let info = document.querySelector("#info");
 let reset = document.querySelector("#reset");
 let turn = 0; //for PVP option
-
 
 // Creates game board ------------------------------------------------------------
 const generalBoard = (() => {
@@ -37,76 +35,96 @@ let Player = (name, symbol) => {
         if ((position[0] === "X" && position[1] === "X" && position[2] === "X") || position[0] === "O" && position[1] === "O" && position[2] === "O") {
             box.forEach(ele => {
                 if (ele.getAttribute("id") == 0 || ele.getAttribute("id") == 1 || ele.getAttribute("id") == 2) {
-                    ele.classList.add("cell-victory");                }
+                    ele.classList.add("cell-victory");
+                }
             })
             return true
         }
         if ((position[0] === "X" && position[4] === "X" && position[8] === "X") || (position[0] === "O" && position[4] === "O" && position[8] === "O")) {
             box.forEach(ele => {
                 if (ele.getAttribute("id") == 0 || ele.getAttribute("id") == 4 || ele.getAttribute("id") == 8) {
-                    ele.classList.add("cell-victory");                }
+                    ele.classList.add("cell-victory");
+                }
             })
             return true
         }
         if ((position[0] === "O" && position[3] === "O" && position[6] === "O") || (position[0] === "X" && position[3] === "X" && position[6] === "X")) {
             box.forEach(ele => {
                 if (ele.getAttribute("id") == 0 || ele.getAttribute("id") == 3 || ele.getAttribute("id") == 6) {
-                    ele.classList.add("cell-victory");                }
+                    ele.classList.add("cell-victory");
+                }
             })
             return true
         }
         if ((position[1] === "X" && position[4] === "X" && position[7] === "X") || (position[1] === "O" && position[4] === "O" && position[7] === "O")) {
             box.forEach(ele => {
                 if (ele.getAttribute("id") == 1 || ele.getAttribute("id") == 4 || ele.getAttribute("id") == 7) {
-                    ele.classList.add("cell-victory");                }
+                    ele.classList.add("cell-victory");
+                }
             })
             return true
         }
         if ((position[2] === "X" && position[5] === "X" && position[8] === "X") || (position[2] === "O" && position[5] === "O" && position[8] === "O")) {
             box.forEach(ele => {
                 if (ele.getAttribute("id") == 2 || ele.getAttribute("id") == 5 || ele.getAttribute("id") == 8) {
-                    ele.classList.add("cell-victory");                }
+                    ele.classList.add("cell-victory");
+                }
             })
             return true
         }
         if ((position[2] === "X" && position[4] === "X" && position[6] === "X") || (position[2] === "O" && position[4] === "O" && position[6] === "O")) {
             box.forEach(ele => {
                 if (ele.getAttribute("id") == 2 || ele.getAttribute("id") == 4 || ele.getAttribute("id") == 6) {
-                    ele.classList.add("cell-victory");                }
+                    ele.classList.add("cell-victory");
+                }
             })
             return true
         }
         if ((position[3] === "X" && position[4] === "X" && position[5] === "X") || (position[3] === "O" && position[4] === "O" && position[5] === "O")) {
             box.forEach(ele => {
                 if (ele.getAttribute("id") == 3 || ele.getAttribute("id") == 4 || ele.getAttribute("id") == 5) {
-                    ele.classList.add("cell-victory");                }
+                    ele.classList.add("cell-victory");
+                }
             })
             return true
         }
         if ((position[6] === "X" && position[7] === "X" && position[8] === "X") || (position[6] === "O" && position[7] === "O" && position[8] === "O")) {
             box.forEach(ele => {
                 if (ele.getAttribute("id") == 6 || ele.getAttribute("id") == 7 || ele.getAttribute("id") == 8) {
-                    ele.classList.add("cell-victory");                }
+                    ele.classList.add("cell-victory");
+                }
             })
             return true
         }
         return false
     }
+    //to insert game time function
+    function timer() {
+        let playButton = document.querySelector("#play")
+        startTime = new Date()
+        playButton.addEventListener('click', function(){
+                let milliseconds = new Date() - startTime;
+                let gameTime = milliseconds/1000 
+                return gameTime
+            })
+        }
+    //declaring winner    
     function winner() {
-        return `Congrats ${name} , You won!`;
+        return `Congrats ${name} , You won! And it only took you ${gameTime} seconds! `;
     }
     return { name, symbol, checkVictory, winner }
+
 }
 
 //Starts the game, create the menu, create the form for PlayerVPlayer|| Player vs PC game, then create the gameboard for the game */
 const game = (() => {
     function menuInitial() {
         option.innerHTML = `<button id="optionPVP">Player vs Player</button>
-        <button id="optionPVPC">Player vs PC</button>`
+        <button id="optionPVPC">Player vs Computer</button>`
         optionPVP = document.querySelector("#optionPVP");
         optionPVPC = document.querySelector("#optionPVPC");
     }
-
+//function for when player v player is selected
     function formPVP() {
         menu.innerHTML = `<p>Player One</p>
         <input type="text" id="playerOne"><br>
@@ -119,7 +137,7 @@ const game = (() => {
         playButton = document.querySelector("#play")
 
     }
-
+//function for when play v computer is selected
     function formPVPC() {
         menu.innerHTML = `<p>Player One</p>
         <input type="text" id="playerOne"><br>
@@ -127,6 +145,7 @@ const game = (() => {
         playerOneName = document.querySelector("#playerOne");
         playButton = document.querySelector("#play")
     }
+
     function initial() {
         info.innerHTML = `<div class="info">
                 <h1>Player ${playerOne.name}<span id="symbolPlayerOne"></span></h1>
@@ -139,6 +158,7 @@ const game = (() => {
         playerTwoBox = document.querySelector("#symbolPlayerTwo");
         turnBox = document.querySelector("#turnPlayer")
         generalBoard.displayBoard();
+
         setTimeout(() => {
             playerOneBox.textContent = playerOne.symbol;
             playerTwoBox.textContent = playerTwo.symbol;
@@ -196,6 +216,7 @@ const game = (() => {
                         turn++;
                     }
                 }
+
             })
         })
     }
@@ -248,6 +269,8 @@ const game = (() => {
                                 } else {
                                     movePc(position)
                                 }
+
+
                             } else {
                                 movePc(position)
                             }
@@ -283,104 +306,152 @@ const game = (() => {
 
     function canWin(position) {
         if (position[0] === "X" && position[1] === "X" && (position[2] !== "O" || position[2] !== "X")) {
-            return { idx: 2 };}
+            return { idx: 2 };
+        }
         if (position[0] === "X" && position[2] === "X" && (position[1] !== "O" || position[1] !== "X")) {
-            return { idx: 1 };}
+            return { idx: 1 };
+        }
         if (position[1] === "X" && position[2] === "X" && (position[0] !== "O" || position[0] !== "X")) {
-            return { idx: 0 };}
+            return { idx: 0 };
+        }
         if (position[0] === "X" && position[4] === "X" && (position[8] !== "O" || position[8] !== "X")) {
-            return { idx: 8 };}
+            return { idx: 8 };
+        }
         if (position[0] === "X" && position[8] === "X" && (position[4] !== "O" && position[4] !== "X")) {
-            return { idx: 4 };}
+            return { idx: 4 };
+        }
         if (position[4] === "X" && position[8] === "X" && (position[0] !== "O" && position[0] !== "X")) {
-            return { idx: 0 };}
+            return { idx: 0 };
+        }
         if (position[0] === "X" && position[3] === "X" && (position[6] !== "O" && position[6] !== "X")) {
-            return { idx: 6 };}
+            return { idx: 6 };
+        }
         if (position[0] === "X" && position[6] === "X" && (position[3] !== "O" && position[3] !== "X")) {
-            return { idx: 3 };}
+            return { idx: 3 };
+        }
         if (position[3] === "X" && position[6] === "X" && (position[0] !== "O" && position[0] !== "X")) {
-            return { idx: 0 };}
+            return { idx: 0 };
+        }
         if (position[1] === "X" && position[4] === "X" && (position[7] !== "O" && position[7] !== "X")) {
-            return { idx: 7 };}
+            return { idx: 7 };
+        }
         if (position[1] === "X" && position[7] === "X" && (position[4] !== "O" && position[4] !== "X")) {
-            return { idx: 4 };}
+            return { idx: 4 };
+        }
         if (position[4] === "X" && position[7] === "X" && (position[1] !== "O" && position[1] !== "X")) {
-            return { idx: 1 };}
+            return { idx: 1 };
+        }
         if (position[2] === "X" && position[5] === "X" && (position[8] !== "O" && position[8] !== "X")) {
-            return { idx: 8 };}
+            return { idx: 8 };
+        }
         if (position[2] === "X" && position[8] === "X" && (position[5] !== "O" && position[5] !== "X")) {
-            return { idx: 5 };}
+            return { idx: 5 };
+        }
         if (position[5] === "X" && position[8] === "X" && (position[2] !== "O" && position[2] !== "X")) {
-            return { idx: 2 };}
+            return { idx: 2 };
+        }
         if (position[3] === "X" && position[4] === "X" && (position[5] !== "O" && position[5] !== "X")) {
-            return { idx: 5 };}
+            return { idx: 5 };
+        }
         if (position[3] === "X" && position[5] === "X" && (position[4] !== "O" && position[4] !== "X")) {
-            return { idx: 4 };}
+            return { idx: 4 };
+        }
         if (position[5] === "X" && position[4] === "X" && (position[3] !== "O" && position[3] !== "X")) {
-            return { idx: 3 };}
+            return { idx: 3 };
+        }
         if (position[6] === "X" && position[7] === "X" && (position[8] !== "O" && position[8] !== "X")) {
-            return { idx: 8 };}
+            return { idx: 8 };
+        }
         if (position[6] === "X" && position[8] === "X" && (position[7] !== "O" && position[7] !== "X")) {
-            return { idx: 7 };}
+            return { idx: 7 };
+        }
         if (position[7] === "X" && position[8] === "X" && (position[6] !== "O" && position[6] !== "X")) {
-            return { idx: 6 };}
+            return { idx: 6 };
+        }
         if (position[2] === "X" && position[4] === "X" && (position[6] !== "O" && position[6] !== "X")) {
-            return { idx: 6 };}
+            return { idx: 6 };
+        }
         if (position[2] === "X" && position[6] === "X" && (position[4] !== "O" && position[4] !== "X")) {
-            return { idx: 4 };}
+            return { idx: 4 };
+        }
         if (position[6] === "X" && position[4] === "X" && (position[2] !== "O" && position[2] !== "X")) {
-            return { idx: 2 };}
+            return { idx: 2 };
+        }
         return false
     }
     function canLose(position) {
         if (position[0] === "O" && position[1] === "O" && (position[2] !== "O" && position[2] !== "X")) {
-            return { idx: 2 };        }
+            return { idx: 2 };
+        }
         if (position[0] === "O" && position[2] === "O" && (position[1] !== "O" && position[1] !== "X")) {
-            return { idx: 1 };        }
+            return { idx: 1 };
+        }
         if (position[1] === "O" && position[2] === "O" && (position[0] !== "O" && position[0] !== "X")) {
-            return { idx: 0 };        }
+            return { idx: 0 };
+        }
         if (position[0] === "O" && position[4] === "O" && (position[8] !== "O" && position[8] !== "X")) {
-            return { idx: 8 };        }
+            return { idx: 8 };
+        }
         if (position[0] === "O" && position[8] === "O" && (position[4] !== "O" && position[4] !== "X")) {
-            return { idx: 4 };        }
+            return { idx: 4 };
+        }
         if (position[4] === "O" && position[8] === "O" && (position[0] !== "O" && position[0] !== "X")) {
-            return { idx: 0 };        }
+            return { idx: 0 };
+        }
         if (position[0] === "O" && position[3] === "O" && (position[6] !== "O" && position[6] !== "X")) {
-            return { idx: 6 };        }
+            return { idx: 6 };
+        }
         if (position[0] === "O" && position[6] === "O" && (position[3] !== "O" && position[3] !== "X")) {
-            return { idx: 3 };        }
+            return { idx: 3 };
+        }
         if (position[3] === "O" && position[6] === "O" && (position[0] !== "O" && position[0] !== "X")) {
-            return { idx: 0 };        }
+            return { idx: 0 };
+        }
         if (position[1] === "O" && position[4] === "O" && (position[7] !== "O" && position[7] !== "X")) {
-            return { idx: 7 };        }
+            return { idx: 7 };
+        }
         if (position[1] === "O" && position[7] === "O" && (position[4] !== "O" && position[4] !== "X")) {
-            return { idx: 4 };        }
+            return { idx: 4 };
+        }
         if (position[4] === "O" && position[7] === "O" && (position[1] !== "O" && position[1] !== "X")) {
-            return { idx: 1 };        }
+            return { idx: 1 };
+        }
         if (position[2] === "O" && position[5] === "O" && (position[8] !== "O" && position[8] !== "X")) {
-            return { idx: 8 };        }
+            return { idx: 8 };
+        }
         if (position[2] === "O" && position[8] === "O" && (position[5] !== "O" && position[5] !== "X")) {
-            return { idx: 5 };        }
+            return { idx: 5 };
+        }
         if (position[5] === "O" && position[8] === "O" && (position[2] !== "O" && position[2] !== "X")) {
-            return { idx: 2 };        }
+            return { idx: 2 };
+        }
         if (position[3] === "O" && position[4] === "O" && (position[5] !== "O" && position[5] !== "X")) {
-            return { idx: 5 };        }
+            return { idx: 5 };
+        }
         if (position[3] === "O" && position[5] === "O" && (position[4] !== "O" && position[4] !== "X")) {
-            return { idx: 4 };        }
+            return { idx: 4 };
+        }
         if (position[5] === "O" && position[4] === "O" && (position[3] !== "O" && position[3] !== "X")) {
-            return { idx: 3 };        }
+            return { idx: 3 };
+        }
         if (position[6] === "O" && position[7] === "O" && (position[8] !== "O" && position[8] !== "X")) {
-            return { idx: 8 };        }
+            return { idx: 8 };
+        }
         if (position[6] === "O" && position[8] === "O" && (position[7] !== "O" && position[7] !== "X")) {
-            return { idx: 7 };        }
+            return { idx: 7 };
+        }
         if (position[7] === "O" && position[8] === "O" && (position[6] !== "O" && position[6] !== "X")) {
-            return { idx: 6 };        }
+            return { idx: 6 };
+        }
         if (position[2] === "O" && position[4] === "O" && (position[6] !== "O" && position[6] !== "X")) {
-            return { idx: 6 };        }
+            return { idx: 6 };
+        }
         if (position[2] === "O" && position[6] === "O" && (position[4] !== "O" && position[4] !== "X")) {
-            return { idx: 4 };        }
+            return { idx: 4 };
+        }
         if (position[6] === "O" && position[4] === "O" && (position[2] !== "O" && position[2] !== "X")) {
-            return { idx: 2 };        }
+            return { idx: 2 };
+        }
         return false
     }
     function moveElement(idx, position) {
@@ -446,10 +517,3 @@ optionPVPC.addEventListener("click", () => {
     }, 1000)
 
 })
-
-//Interval Timer
-//setInterval(function (), 1000)
-
-//reset button function-----------------------------------------------------------------------
-// let reset = document.querySelector("#reset");
-// reset.addEventListener('click', displayBoard)
