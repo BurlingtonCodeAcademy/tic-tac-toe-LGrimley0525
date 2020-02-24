@@ -9,7 +9,7 @@ let info = document.querySelector("#info");
 let reset = document.querySelector("#reset");
 let turn = 0; //for PVP option
 
-// Creates game board ------------------------------------------------------------
+// Creates game board ----------------------------------------------------------------
 const generalBoard = (() => {
     let board = ["topLeft", "topCenter", "topRight", "centerLeft", "center", "centerRight", "bottomLeft", "bottomCenter", "bottomRight"]
     function displayBoard() {
@@ -29,7 +29,7 @@ const generalBoard = (() => {
     }
 })();
 
-//Creates player with name and to check if player wins the game----------------------------------
+//Creates player and checks if player wins the game----------------------------------
 let Player = (name, symbol) => {
     function checkVictory(position) {
         if ((position[0] === "X" && position[1] === "X" && position[2] === "X") || position[0] === "O" && position[1] === "O" && position[2] === "O") {
@@ -98,25 +98,15 @@ let Player = (name, symbol) => {
         }
         return false
     }
-    //to insert game time function
-    function timer() {
-        let playButton = document.querySelector("#play")
-        startTime = new Date()
-        playButton.addEventListener('click', function(){
-                let milliseconds = new Date() - startTime;
-                let gameTime = milliseconds/1000 
-                return gameTime
-            })
-        }
-    //declaring winner    
+
     function winner() {
-        return `Congrats ${name} , You won! And it only took you ${gameTime} seconds! `;
+        return `Congrats ${name} , You won!`;
     }
     return { name, symbol, checkVictory, winner }
 
 }
 
-//Starts the game, create the menu, create the form for PlayerVPlayer|| Player vs PC game, then create the gameboard for the game */
+//Starts the game, create the menu, create the form for PlayerVPlayer|| PlayervsPC 
 const game = (() => {
     function menuInitial() {
         option.innerHTML = `<button id="optionPVP">Player vs Player</button>
@@ -124,7 +114,7 @@ const game = (() => {
         optionPVP = document.querySelector("#optionPVP");
         optionPVPC = document.querySelector("#optionPVPC");
     }
-//function for when player v player is selected
+//function for playing against another human
     function formPVP() {
         menu.innerHTML = `<p>Player One</p>
         <input type="text" id="playerOne"><br>
@@ -135,9 +125,8 @@ const game = (() => {
         playerOneName = document.querySelector("#playerOne");
         playerTwoName = document.querySelector("#playerTwo");
         playButton = document.querySelector("#play")
-
     }
-//function for when play v computer is selected
+//function for playing against computer
     function formPVPC() {
         menu.innerHTML = `<p>Player One</p>
         <input type="text" id="playerOne"><br>
@@ -220,7 +209,7 @@ const game = (() => {
             })
         })
     }
-
+//function for starting game against computer----------------------------------------
     function startVsPc() {
         box = document.querySelectorAll(".cell")
         let position = generalBoard.board;
@@ -269,8 +258,6 @@ const game = (() => {
                                 } else {
                                     movePc(position)
                                 }
-
-
                             } else {
                                 movePc(position)
                             }
@@ -280,7 +267,7 @@ const game = (() => {
             })
         })
     }
-
+//function for generating computer move-------------------------------------------
     function movePc(position) {
         let validCell = position.filter(ele => ele !== "O" && ele !== "X")
         let randomChoice = Math.floor(Math.random() * validCell.length);
@@ -303,7 +290,6 @@ const game = (() => {
             })
         }
     }
-
     function canWin(position) {
         if (position[0] === "X" && position[1] === "X" && (position[2] !== "O" || position[2] !== "X")) {
             return { idx: 2 };
@@ -462,13 +448,13 @@ const game = (() => {
                 ele.setAttribute("id", idx);
             }
         })
-    }
-    return { initial, start, menuInitial, formPVP, formPVPC, startVsPc }
+    }    return { initial, start, menuInitial, formPVP, formPVPC, startVsPc }
 })()
-
 game.menuInitial();
 
-//If player selects to play against another human-------------------------------------------
+//Event Listeners-------------------------------------------------------------------------
+
+//If player clicks on button to play against another human--------------------------------
 optionPVP.addEventListener("click", () => {
     list.classList.add("invisible");
     setTimeout(() => {
@@ -492,7 +478,7 @@ optionPVP.addEventListener("click", () => {
         menu.classList.toggle("visible");
     }, 1000)
 })
-//If Player selects to play against computer--------------------------------------------------
+//If Player clicks on button to play against computer--------------------------------------
 optionPVPC.addEventListener("click", () => {
     list.classList.add("invisible");
     setTimeout(() => {
@@ -515,5 +501,4 @@ optionPVPC.addEventListener("click", () => {
         menu.classList.toggle("invisible");
         menu.classList.toggle("visible");
     }, 1000)
-
 })
