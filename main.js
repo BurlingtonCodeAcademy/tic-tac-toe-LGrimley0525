@@ -106,7 +106,7 @@ let Player = (name, symbol) => {
 
 }
 
-//Starts the game, create the menu, create the form for PlayerVPlayer|| PlayervsPC 
+//Starts the game either for PlayervPlayer|| PlayervsComputer-------------------------- 
 const game = (() => {
     function menuInitial() {
         option.innerHTML = `<button id="optionPVP">Player vs Player</button>
@@ -114,7 +114,7 @@ const game = (() => {
         optionPVP = document.querySelector("#optionPVP");
         optionPVPC = document.querySelector("#optionPVPC");
     }
-//function for playing against another human
+    //function for when player selects playing against another human
     function formPVP() {
         menu.innerHTML = `<p>Player One</p>
         <input type="text" id="playerOne"><br>
@@ -126,7 +126,7 @@ const game = (() => {
         playerTwoName = document.querySelector("#playerTwo");
         playButton = document.querySelector("#play")
     }
-//function for playing against computer
+    //function for when player selects playing against computer
     function formPVPC() {
         menu.innerHTML = `<p>Player One</p>
         <input type="text" id="playerOne"><br>
@@ -147,7 +147,6 @@ const game = (() => {
         playerTwoBox = document.querySelector("#symbolPlayerTwo");
         turnBox = document.querySelector("#turnPlayer")
         generalBoard.displayBoard();
-
         setTimeout(() => {
             playerOneBox.textContent = playerOne.symbol;
             playerTwoBox.textContent = playerTwo.symbol;
@@ -209,7 +208,7 @@ const game = (() => {
             })
         })
     }
-//function for starting game against computer----------------------------------------
+    //function for starting game against computer----------------------------------------
     function startVsPc() {
         box = document.querySelectorAll(".cell")
         let position = generalBoard.board;
@@ -267,7 +266,7 @@ const game = (() => {
             })
         })
     }
-//function for generating computer move-------------------------------------------
+    //function for generating computer move-------------------------------------------
     function movePc(position) {
         let validCell = position.filter(ele => ele !== "O" && ele !== "X")
         let randomChoice = Math.floor(Math.random() * validCell.length);
@@ -290,6 +289,28 @@ const game = (() => {
             })
         }
     }
+    //creating game timer
+    let minutesLabel = document.getElementById("minutes");
+    let secondsLabel = document.getElementById("seconds");
+    let totalSeconds = 0;
+    setInterval(setTime, 1000);
+
+    function setTime() {
+        ++totalSeconds;
+        secondsLabel.innerHTML = pad(totalSeconds % 60);
+        minutesLabel.innerHTML = pad(parseInt(totalSeconds / 60));
+    }
+
+    function pad(val) {
+        let valString = val + "";
+        if (valString.length < 2) {
+            return "0" + valString;
+        } else {
+            return valString;
+        }
+    }
+
+
     function canWin(position) {
         if (position[0] === "X" && position[1] === "X" && (position[2] !== "O" || position[2] !== "X")) {
             return { idx: 2 };
@@ -448,7 +469,7 @@ const game = (() => {
                 ele.setAttribute("id", idx);
             }
         })
-    }    return { initial, start, menuInitial, formPVP, formPVPC, startVsPc }
+    } return { initial, start, menuInitial, formPVP, formPVPC, startVsPc }
 })()
 game.menuInitial();
 
