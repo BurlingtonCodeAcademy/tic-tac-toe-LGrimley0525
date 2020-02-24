@@ -1,8 +1,7 @@
 *::before,
 *::after,
 * 
-{
-    margin: 0;
+{    margin: 0;
     padding: 0;
     box-sizing: inherit;
 }
@@ -11,8 +10,7 @@ html{
     font-size: 65%;
 }
 
-body{
-    background-color: rgb(235, 176, 176);
+body{background-color: rgb(235, 176, 176);
     width: 1000px;
     margin: 10px auto;
     text-align: center;
@@ -21,10 +19,9 @@ body{
 
 header{
     width: 100%;
-    padding: .75rem 1rem;
+    padding: .50rem .50rem;
     background: powderblue;
 }
-
 
 header h1{
     text-align: center;
@@ -117,7 +114,6 @@ main .list button.disabled{
     color:   rgb(235, 176, 176);
     transition: all .2s ease;
 }
-
 
 .board .info{
     display: flex;
