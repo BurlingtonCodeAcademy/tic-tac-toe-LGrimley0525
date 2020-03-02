@@ -6,4 +6,4 @@ app.use(express.static('public'))
 
 
 
-app.listen(PORT, () => console.log(`Running on port: ${PORT}`))
+app.listen(PORT, () => {console.log(`Running on port: ${PORT}`)})
