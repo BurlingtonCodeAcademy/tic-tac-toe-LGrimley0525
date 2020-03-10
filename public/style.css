@@ -1,7 +1,9 @@
+/* General Body CSS --------------------------- */
+
 *::before,
 *::after,
-* 
-{   margin: 0;
+* {
+    margin: 0;
     padding: 0;
     box-sizing: inherit;
 }
@@ -10,7 +12,8 @@ html{
     font-size: 65%;
 }
 
-body{background-color: rgb(235, 176, 176);
+body{
+    background-color: rgb(235, 176, 176);
     width: 1000px;
     margin: 10px auto;
     text-align: center;
@@ -31,6 +34,7 @@ header h1{
     color:  blueviolet;
     margin-bottom: 0;
 }
+
 main .list {
     width: 20vw;
     margin: 2rem auto;
@@ -39,31 +43,37 @@ main .list {
     justify-content: center;
     align-self: center;
 }
+
 main .list button{
     margin: 2rem;
     padding: 1rem 2rem;
     text-align: center;
     cursor: pointer;
-    background:  rgb(235, 176, 176);
-    border: 1px solid  blueviolet;
-    color:  blueviolet;
+    background: rgb(235, 176, 176);
+    border: 1px solid blueviolet;
+    color: blueviolet;
     font-size: 1.5rem;
     font-weight: 500;
     transition: all .5s ease;    
 }
+
 main .list button:not(.disabled):hover{
-    background:  blueviolet;
+    background: blueviolet;
     border-color: rgb(235, 176, 176);
     color: #ffeecf;
     transition: all .2s ease;
 }
+
 main .list button:focus{
     outline: none;
 }
+
 main .list button.disabled{
     filter: grayscale(100);
     cursor: initial;
 }
+
+/* Board and Form CSS-------------------------- */
 
 .form{
     width: 40vw;
@@ -73,7 +83,7 @@ main .list button.disabled{
 
 .form p{
     font-size: 1.3rem;
-    color:  blueviolet;
+    color: blueviolet;
     text-transform: uppercase;
     margin-top: 1rem;
     margin-right: .4rem;
@@ -81,9 +91,9 @@ main .list button.disabled{
 }
 
 .form input{
-    border: 1px solid  blueviolet;
+    border: 1px solid blueviolet;
     background: rgb(235, 176, 176);
-    color:  blueviolet;
+    color: blueviolet;
     font-size: 1.3rem;
     font-weight: bold;
     padding: .75rem 2rem;
@@ -96,9 +106,9 @@ main .list button.disabled{
     padding: .75rem 2.5rem;
     text-align: center;
     cursor: pointer;
-    background:  rgb(235, 176, 176);
-    border: 1px solid  blueviolet;
-    color:  blueviolet;
+    background: rgb(235, 176, 176);
+    border: 1px solid blueviolet;
+    color: blueviolet;
     font-size: 1.5rem;
     font-weight: 500;
     transition: all .2s ease;    
@@ -109,9 +119,9 @@ main .list button.disabled{
 }
 
 .form button:hover{
-    background:  blueviolet;
-    border-color:  rgb(235, 176, 176);
-    color:   rgb(235, 176, 176);
+    background: blueviolet;
+    border-color: rgb(235, 176, 176);
+    color: rgb(235, 176, 176);
     transition: all .2s ease;
 }
 
@@ -136,12 +146,14 @@ main .list button.disabled{
     padding: .6rem 2rem;
 }
 
+/* Winner & Reset Game---------------------------------- */
+
 .winner{
     display: block;
     text-align: center;
     padding: 2rem 2rem;
-    background:  rgb(235, 176, 176);
-    color:  blueviolet;
+    background: rgb(235, 176, 176);
+    color: blueviolet;
     font-size: 3rem;
     text-transform: uppercase;
 }
@@ -151,8 +163,8 @@ main .list button.disabled{
     display: block;
     margin: 2px auto;
     font-size: 2rem;
-    background:  blueviolet;
-    color:  rgb(235, 176, 176);
+    background: blueviolet;
+    color: rgb(235, 176, 176);
     border: none;
     padding: .50rem 2rem;
     cursor: pointer;

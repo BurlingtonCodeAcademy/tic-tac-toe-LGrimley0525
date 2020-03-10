@@ -29,7 +29,8 @@ const generalBoard = (() => {
     }
 })();
 
-//Creates player and checks if player wins the game----------------------------------
+//Creates player and checks position on board for winner-----------------------------
+
 let Player = (name, symbol) => {
     function checkVictory(position) {
         if ((position[0] === "X" && position[1] === "X" && position[2] === "X") || position[0] === "O" && position[1] === "O" && position[2] === "O") {
@@ -99,14 +100,16 @@ let Player = (name, symbol) => {
         return false
     }
 
+//when winner determined, returns function below-----------------------------------
     function winner() {
         return `Congrats ${name} , You won!`;
     }
     return { name, symbol, checkVictory, winner }
-
 }
 
-//Starts the game either for PlayervPlayer|| PlayervsComputer-------------------------- 
+
+//Starts the game either for PlayervPlayer|| PlayervsComputer-------------------------
+
 const game = (() => {
     function menuInitial() {
         option.innerHTML = `<button id="optionPVP">Player vs Player</button>
@@ -114,7 +117,9 @@ const game = (() => {
         optionPVP = document.querySelector("#optionPVP");
         optionPVPC = document.querySelector("#optionPVPC");
     }
-    //function for when player selects playing against another human
+
+    //function for when player selects playing against another human--------
+
     function formPVP() {
         menu.innerHTML = `<p>Player One</p>
         <input type="text" id="playerOne"><br>
@@ -126,7 +131,9 @@ const game = (() => {
         playerTwoName = document.querySelector("#playerTwo");
         playButton = document.querySelector("#play")
     }
-    //function for when player selects playing against computer
+
+    //function for when player selects playing against computer-------------
+
     function formPVPC() {
         menu.innerHTML = `<p>Player One</p>
         <input type="text" id="playerOne"><br>
@@ -134,6 +141,8 @@ const game = (() => {
         playerOneName = document.querySelector("#playerOne");
         playButton = document.querySelector("#play")
     }
+
+    //Initialization of the game-----------------------------------------------------
 
     function initial() {
         info.innerHTML = `<div class="info">
@@ -162,6 +171,9 @@ const game = (() => {
             }, 1000)
         }, 1000);
     }
+
+    //Starts the game upon player click------------------------------
+
     function start() {
         box = document.querySelectorAll(".cell")
         let position = generalBoard.board;
@@ -208,6 +220,7 @@ const game = (() => {
             })
         })
     }
+
     //function for starting game against computer----------------------------------------
     function startVsPc() {
         box = document.querySelectorAll(".cell")
@@ -266,7 +279,9 @@ const game = (() => {
             })
         })
     }
-    //function for generating computer move-------------------------------------------
+
+//function for generating computer move-------------------------------------------
+
     function movePc(position) {
         let validCell = position.filter(ele => ele !== "O" && ele !== "X")
         let randomChoice = Math.floor(Math.random() * validCell.length);
@@ -289,17 +304,6 @@ const game = (() => {
             })
         }
     }
-    //creating game timer
-    let minutesLabel = document.getElementById("minutes");
-    let secondsLabel = document.getElementById("seconds");
-    let totalSeconds = 0;
-    setInterval(setTime, 1000);
-
-    function setTime() {
-        ++totalSeconds;
-        secondsLabel.innerHTML = pad(totalSeconds % 60);
-        minutesLabel.innerHTML = pad(parseInt(totalSeconds / 60));
-    }
 
     function pad(val) {
         let valString = val + "";
@@ -310,6 +314,7 @@ const game = (() => {
         }
     }
 
+//Determines if computer can win then determines the computer move to win------------------
 
     function canWin(position) {
         if (position[0] === "X" && position[1] === "X" && (position[2] !== "O" || position[2] !== "X")) {
@@ -386,9 +391,12 @@ const game = (() => {
         }
         return false
     }
+
+//Determines if computer computer can lose then determines the placement------------------------------
+
     function canLose(position) {
         if (position[0] === "O" && position[1] === "O" && (position[2] !== "O" && position[2] !== "X")) {
-            return { idx: 2 };
+           return { idx: 2 };
         }
         if (position[0] === "O" && position[2] === "O" && (position[1] !== "O" && position[1] !== "X")) {
             return { idx: 1 };
@@ -472,6 +480,21 @@ const game = (() => {
     } return { initial, start, menuInitial, formPVP, formPVPC, startVsPc }
 })()
 game.menuInitial();
+
+
+//Creating game timer----------------------------------------
+
+let minutesLabel = document.getElementById("minutes");
+let secondsLabel = document.getElementById("seconds");
+let totalSeconds = 0;
+setInterval(setTime, 1000);
+
+function setTime() {
+    ++totalSeconds;
+    secondsLabel.innerHTML = pad(totalSeconds % 60);
+    minutesLabel.innerHTML = pad(parseInt(totalSeconds / 60));
+}
+
 
 //Event Listeners-------------------------------------------------------------------------
 
